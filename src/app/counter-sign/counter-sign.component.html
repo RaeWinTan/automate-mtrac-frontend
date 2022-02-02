@@ -1,0 +1,21 @@
+<div class="modal-header">
+     <h4 class="modal-title">Counter Sign Link</h4>
+     <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+       <span aria-hidden="true">&times;</span>
+     </button>
+   </div>
+   <div class="modal-body">
+     <div class="container">
+       <div class="row p-0 m-0 d-flex justify-content-center">
+        <div class="col-sm">
+          https://mtrac.ado.sg/counter-sign/{{id}}
+        </div>
+        <div class="col-sm">
+          <button type="button" class="btn btn-success" (click)="copyLink()">copy link</button>
+        </div>
+      </div>
+     </div>
+   </div>
+   <div class="modal-footer">
+     <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+   </div>

@@ -1,0 +1,81 @@
+<app-navigation></app-navigation>
+
+<form *ngIf="defRac$ | async" class="container-sm p-3" [formGroup]='racControl' novalidate>
+  <div class="form-group"><h1 class="text-center">Change Default Rac Form Values</h1></div>
+  <div class="form-group">
+    <label for="hub">Hub</label>
+    <div [hidden]="!hubNodesLoad"  class="form-control">
+      <div class="loader"></div>
+    </div>
+    <select [hidden]="hubNodesLoad"  class="form-control" formControlName="hubId" id="hub">
+      <option value=""></option>
+      <option *ngFor="let p of hubNodes$|async" [value]="p.id">{{p.shortName}}</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="node">Node</label>
+    <div [hidden]="!hubNodesLoad" class="form-control">
+      <div class="loader"></div>
+    </div>
+    <select [hidden]="hubNodesLoad" class="form-control" formControlName="nodeId" id="node">
+      <option value=""></option>
+      <option *ngFor="let n of nodes$|async" [value]="n.id">{{n.shortName}}</option>
+    </select>
+  </div>
+  <div class="form-group">
+
+    <button [hidden]="!hubNodesLoad" class="btn form-control">
+      <div class="loader"></div>
+    </button>
+    <button [hidden]="hubNodesLoad" class="btn btn-light" #refreshBtn>refresh Hub and Node options</button>
+  </div>
+  <div class="form-group" *ngFor="let m of mainStuff">
+    <label >{{m.title}}</label>
+    <input [type]="m.type" [formControlName]="m.fieldName" class="form-control">
+  </div>
+
+  <fieldset class="form-group">
+    <div class="row">
+      <legend class="col-form-label col-sm pt-0"><h3>{{driverChecklist.title}}</h3></legend>
+      <div class="col-sm-10">
+        <div class="form-check" *ngFor="let f of driverChecklist.fields">
+          <input class="form-check-input" type="checkbox" name="driverChecklist"  [value]="f[1]" [checked]="(defRac$ | async).driverChecklist.includes(f[1])" (change)="onCheckboxChange($event)">
+          <label class="form-check-label" for="gridRadios1">
+            {{f[0]}}
+          </label>
+        </div>
+      </div>
+    </div>
+  </fieldset>
+  <fieldset class="form-group">
+    <div class="row">
+      <legend class="col-form-label col-sm pt-0"><h2 >Risk Fields</h2></legend>
+      <div class="col-sm-10">
+        <ng-container *ngFor="let i of racRiskFields">
+          <div class="row">
+            <label [for]="i.fieldName" class="col-form-label"> <h3>{{i.title}}</h3></label>
+          </div>
+          <div class="form-check" *ngFor="let field of i.fields">
+              <input class="form-check-input" type="radio" [formControlName]="i.fieldName" [name]="i.fieldName" [value]="field[1]"  [checked]="(defRac$ | async)[i.fieldName] === field[1]">
+              <label class="form-check-label" >
+                {{field[0]}}
+              </label>
+          </div>
+        </ng-container>
+        <div class="row">
+          <label for="standingOrder" class="col-form-label"> <h3>Standing Order</h3></label>
+        </div>
+        <div class="form-check" >
+            <input class="form-check-input" type="checkbox" formControlName="standingOrder" name="standingOrder" [value]="(defRac$ | async).standingOrder"  [checked]="(defRac$ | async).standingOrder" (change)="onSOChange($event)">
+            <label class="form-check-label" >
+              I have read the MT-RAC standing orders
+            </label>
+        </div>
+      </div>
+    </div>
+  </fieldset>
+
+  <div class="row d-flex justify-content-center ">
+   <button class="btn btn-info" #saveBtn>Save Default RAC</button>
+  </div>
+ </form>
