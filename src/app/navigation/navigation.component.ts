@@ -12,7 +12,8 @@ export class NavigationComponent implements OnInit {
   constructor(private auth:AuthenticationService) { }
   email:string;
   ngOnInit(): void {
-    this.email = this.auth.getCredentials().email;
+
+    this.email = this.auth.getCredentials()?.email || "";
   }
 
   signout(){

@@ -16,6 +16,7 @@ import { ClipboardModule } from 'ngx-clipboard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatAutocompleteModule, MatAutocompleteTrigger} from '@angular/material/autocomplete';
 import {MatInputModule} from '@angular/material/input';
+import { AboutComponent } from './about/about.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +24,8 @@ import {MatInputModule} from '@angular/material/input';
     SettingsComponent,
     LoginComponent,
     NavigationComponent,
-    CounterSignComponent
+    CounterSignComponent,
+    AboutComponent
   ],
   imports: [
     FormsModule,

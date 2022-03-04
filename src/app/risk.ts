@@ -19,6 +19,7 @@ export const driverChecklist = {
 };
 export enum risk {
   LOW = "LOW",
+  LOW_ = "LOW",
   MEDIUM = "MEDIUM",
   HIGH = "HIGH",
   NO_MOVE = "NO_MOVE",
@@ -40,7 +41,7 @@ export const mainStuff = [
     {  title: 'journey To',
       fieldName: 'journeyTo',
       type:"text"
-    },
+    }
 ];
 
 export const racRiskFields = [
@@ -136,6 +137,13 @@ export const racRiskFields = [
       ['Major fault', risk.NO_MOVE],
     ],
   },
+  {
+    title: 'JIT',
+    fieldName: 'jit',
+    fields: [
+      ['JIT Not Applicable / JIT Applicable', risk.LOW]
+    ],
+  }
 ];
 
 export const defaultTemplate = ():any =>{

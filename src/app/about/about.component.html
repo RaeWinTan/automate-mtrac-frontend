@@ -1,0 +1,103 @@
+
+<!--<div class="container vh-100">-->
+    <app-navigation></app-navigation>
+<div class="container">
+  <div class="row m-1">
+    <div class="col-sm m-2">
+      <div class="card">
+
+        <div class="card-header text-center">Features</div>
+
+        <div class="card-body">
+          <h5 class="card-title">Remembers RAC form</h5>
+          <p class="card-text">
+            Unlike the official webpage, this webpage saves previously set values of the Risk Assessment Card so you dont have to click on/type the same values each time you want to send a rac.
+          </p>
+        </div>
+
+        <div class="card-body">
+          <h5 class="card-title">Change default RAC form values</h5>
+          <p class="card-text">
+            You are able to change default values of the RAC for a more customised default RAC values.
+          </p>
+        </div>
+
+        <div class="card-body">
+          <h5 class="card-title">No Need relogin</h5>
+          <p class="card-text">
+            As long as you don't logout, you wont have to log back in each time you want to send a RAC.
+          </p>
+        </div>
+
+      </div>
+    </div>
+    <div class="col-sm m-2">
+      <div class="card">
+        <div class="card-header text-center">Prerequisites</div>
+        <div class="card-body">
+          <h5 class="card-title">Account creation</h5>
+          <p class="card-text">
+            To use this application you must first have an account with the <a href="https://mtrac.ternary.digital/" target="_blank">official mtrac website</a>.
+          </p>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Browser</h5>
+          <p class="card-text">
+            This webpage saves your data in your browsers' storage. To enjoy the full functionality of this website, you must <strong class="text-danger">not</strong> be in <strong class="text-danger">incognito</strong> mode. Use the same browser from the same device so that you don't have to reset all values each time.
+          </p>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Initialisation</h5>
+          <p class="card-text">
+            If this is your first time using this website on a different device/different browser. Here are the steps you have to take.
+          </p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">1. Key in correct credentials and Login.</li>
+          <li class="list-group-item">2. Ensure you are in the `Send rac` page.</li>
+          <li class="list-group-item">3. Type in correct values into the RAC form and click on `SEND RAC`.
+          This values will be set as default values for all subsequent times you send RAC unless you `Change default form values`.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-sm m-2">
+      <div class="card">
+        <div class="card-header text-center">How this website works</div>
+        <div class="card-body">
+          <h5 class="card-title">Web Api</h5>
+          <p class="card-text">The <a href="https://mtrac.ternary.digital/" target="_blank">official mtrac website</a> works like most modern websites. It has a frontend in a form of a webpage aka client(what users like you interect with),
+            and a backend server (i.e. a server which transmit data either to the client or vice versa). Some clicks on the mtrac webpage (i.e. when you click the login button or the send mtrac button on the webpage) make network calls to the backend server
+            of the mtrac website. What allows the frontend of the website to interact with the backend is called a web api, in layman's terms the brain of the website is the backend and the web api is just a way to interact with the backend. Web api is a subset of backend but for simplicity sake you can use it interchangeably throughout this article. The image below is roughly how the official mtrac application works.
+          </p>
+          <img class="card-img-bottom" src="/assets/images/d1.png" alt="network diagram">
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Difference</h5>
+          <p class="card-text">
+            This website still uses the same web api as the official mtrac webpage just that the
+            frontend (the webpage served to the client, like a PC or phone) is different. Since
+            this website shares the same `Brain` (web api) as a the official mtrac webpage, this webpage is compatible with the mtrac website. This website just serves a modified webpage. Read the section on 'Features' to understand the differenciating factor of this frontend compared to the official website's webpage.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row m-1">
+    <div class="col-sm m-2">
+      <div class="card">
+        <div class="card-header text-center">Problem statement</div>
+        <div class="card-body">
+          <h5 class="card-title">Red tape</h5>
+          <p class="card-text">
+            In the SAF there's just too many red tapes a driver must go through just to go for a drive. One of the time comsuming process that can expedite is the online MT-RAC.
+            This webpage saves RAC form values from previous submissions so that drivers do not have to re-enter the same values each time.
+          </p>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>

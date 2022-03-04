@@ -149,7 +149,26 @@ export class DefaultPageComponent implements OnInit, AfterViewInit, OnDestroy {
           modelRef.componentInstance.id = res.id;
         }),
         catchError((err:HttpErrorResponse|any)=>{
-          return throwError(err);
+          if(Array.isArray(err.error.message)){
+            this.sendRacLoad = false;
+            for(let e of err.error.message) this.toastr.error(e, "WRONG INPUT", {positionClass: 'toast-top-center',timeOut:5000});
+          }
+          else {
+            this.toastr.error(err.error.message, "ERROR OCCURED");
+            this.sendRacLoad = false;
+            if(err.error?.data){
+              //here must referesh the optsion again
+              this.getNodeHub.pipe(
+                finalize(()=>{
+                  this.racControl.patchValue({
+                    hubId:err.error.data.hubId,
+                    nodeId:err.error.data.nodeId
+                  });
+                })
+              ).subscribe(()=>{}, ()=>{},()=>this.sendRacLoad=false);
+            }
+          }
+          return of();
         })
       ))
     );
@@ -162,29 +181,7 @@ export class DefaultPageComponent implements OnInit, AfterViewInit, OnDestroy {
         let def = JSON.parse(JSON.stringify(this.racControl.value));
         return this.sendRac(dontHave, def);
       })
-    ).subscribe((x)=>{console.log("sendRac",x)},
-    (err:HttpErrorResponse|any)=>{
-      if(Array.isArray(err.error.message)){
-        this.sendRacLoad = false;
-        for(let e of err.error.message) this.toastr.error(e, "WRONG INPUT", {positionClass: 'toast-top-center',timeOut:5000});
-      }
-      else {
-        this.toastr.error(err.error.message, "ERROR OCCURED");
-        this.sendRacLoad = false;
-        if(err.error?.data){
-          //here must referesh the optsion again
-          this.getNodeHub.pipe(
-            finalize(()=>{
-              this.racControl.patchValue({
-                hubId:err.error.data.hubId,
-                nodeId:err.error.data.nodeId
-              });
-            })
-          ).subscribe(()=>{}, ()=>{},()=>this.sendRacLoad=false);
-        }
-      }
-    },
-    ()=>console.log("all is done"));
+    ).subscribe((x)=>{console.log("sendRac",x)},()=>{},()=>console.log("all is done"));
     this.manualRefreshHubNodeAPI$ = fromEvent(this.refreshBtn.nativeElement, "click").pipe(
       exhaustMap(()=>this.manualRefresh()),
       tap(()=>console.log("AFTER EXHAUST MAP "))

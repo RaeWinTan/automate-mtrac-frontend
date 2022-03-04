@@ -5,7 +5,9 @@
   <div class="form-group">
     <label for="hub">Hub</label>
     <div [hidden]="!hubNodesLoad"  class="form-control">
-      <div class="loader"></div>
+      <div class="loader">
+        <div class="loaderBar"></div>
+      </div>
     </div>
     <select [hidden]="hubNodesLoad"  class="form-control" formControlName="hubId" id="hub">
       <option value=""></option>
@@ -15,7 +17,9 @@
   <div class="form-group">
     <label for="node">Node</label>
     <div [hidden]="!hubNodesLoad" class="form-control">
-      <div class="loader"></div>
+      <div class="loader">
+        <div class="loaderBar"></div>
+      </div>
     </div>
     <select [hidden]="hubNodesLoad" class="form-control" formControlName="nodeId" id="node">
       <option value=""></option>
@@ -25,7 +29,9 @@
   <div class="form-group">
 
     <button [hidden]="!hubNodesLoad" class="btn form-control">
-      <div class="loader"></div>
+      <div class="loader">
+        <div class="loaderBar"></div>
+      </div>
     </button>
     <button [hidden]="hubNodesLoad" class="btn btn-light" #refreshBtn>refresh Hub and Node options</button>
   </div>

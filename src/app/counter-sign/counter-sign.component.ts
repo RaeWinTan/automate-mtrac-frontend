@@ -14,7 +14,7 @@ export class CounterSignComponent implements OnInit {
   ngOnInit(): void {
   }
   copyLink(){
-    this.cs.copy(`https://mtrac.ado.sg/counter-sign/${this.id}`);
+    this.cs.copy(`https://mtrac.ternary.digital/counter-sign/${this.id}`);
   }
 
 }

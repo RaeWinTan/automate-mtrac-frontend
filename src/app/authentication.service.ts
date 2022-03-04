@@ -24,6 +24,7 @@ export class AuthenticationService {
   }
 
   signIn(credentials:any):Observable<any>{
+    console.log("singin in");
     return this.http.post('/api/mtrac/login', credentials).pipe(
       tap((x:any)=>this.hns.addNodeHub(credentials, {email:credentials.email,data:{hubId:x.node.hub.id,nodeId:x.node.id}}))
     );
@@ -36,6 +37,6 @@ export class AuthenticationService {
    return localStorage.getItem('token')
   }
   getCredentials():Credentials{
-    return JSON.parse(localStorage.getItem("credentials"));
+    return JSON.parse(localStorage.getItem("credentials")||"{}");
   }
 }

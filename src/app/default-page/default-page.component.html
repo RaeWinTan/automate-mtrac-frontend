@@ -1,11 +1,19 @@
 <app-navigation></app-navigation>
+
+
+
 <form *ngIf="defRac$ | async" class="container-sm p-3" [formGroup]='racControl' novalidate >
   <div class="form-group"><h1 class="text-center">SEND RAC</h1></div>
   <div class="form-group">
     <label for="hub">Hub</label>
+
     <div [hidden]="!hubNodesLoad" class="form-control">
-      <div class="loader"></div>
+      <div class="loader">
+        <div class="loaderBar"></div>
+      </div>
     </div>
+
+
     <select [hidden]="hubNodesLoad" class="form-control" formControlName="hubId" id="hub">
       <option value=""></option>
       <option *ngFor="let p of hubNodes$|async" [value]="p.id" [selected]="racControl.value.hubId === p.id">{{p.shortName}}</option>
@@ -14,7 +22,9 @@
   <div class="form-group">
     <label for="node">Node</label>
     <div [hidden]="!hubNodesLoad" class="form-control">
-      <div class="loader"></div>
+      <div class="loader">
+        <div class="loaderBar"></div>
+      </div>
     </div>
     <select [hidden]="hubNodesLoad" class="form-control" formControlName="nodeId" id="node">
       <option value=""></option>
@@ -23,7 +33,9 @@
   </div>
   <div class="form-group">
     <button [hidden]="!hubNodesLoad" class="btn form-control">
-      <div class="loader"></div>
+      <div class="loader">
+        <div class="loaderBar"></div>
+      </div>
     </button>
     <button [hidden]="hubNodesLoad" class="btn btn-light" #refreshBtn>refresh Hub and Node options</button>
   </div>
@@ -49,6 +61,10 @@
         <input [type]="m.type" [formControlName]="m.fieldName" class="form-control">
       </ng-template>
     </ng-template>
+  </div>
+  <div class="form-group">
+    <label>Detail ID(optional)</label>
+    <input type="text"  class="form-control">
   </div>
   <fieldset class="form-group">
     <div class="row">
@@ -101,7 +117,9 @@
   </div>
   <div class="row d-flex justify-content-center ">
     <button [hidden]="!sendRacLoad" class=" btn form-control">
-      <div class="loader"></div>
+      <div class="loader">
+        <div class="loaderBar"></div>
+      </div>
     </button>
      <button [hidden]="sendRacLoad" class="btn btn-info" [disabled]="racControl.invalid" #sendBtn>SEND RAC</button>
   </div>

@@ -33,7 +33,8 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   ngAfterViewInit(){
     this.login$ =  fromEvent(this.loginBtn.nativeElement, "click").pipe(
-      finalize(()=>this.loginLoad = false),
+      tap(()=>console.log("COLCI DETEDED")),
+      finalize(()=>console.log("STOP LISTENING")),
       exhaustMap(()=>this.signIn(this.credentials))
     ).subscribe(()=>{},(err:HttpErrorResponse)=>{
       this.auth.signOut();
@@ -45,9 +46,16 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
     this.login$.unsubscribe();
   }
   signIn(credentials:Credentials):Observable<any>{
-    return of(credentials).pipe(
+    return of(credentials).pipe(//catch error here so that it wont throw errors to login btn
       tap(()=>this.loginLoad = true),
       switchMap(()=>this.auth.signIn(credentials).pipe(
+        catchError((err:HttpErrorResponse)=>{
+          this.auth.signOut();
+          this.loginLoad = false;
+          this.toastr.error(err.error.message, "ERROR", {timeOut: 2000,
+            positionClass: 'toast-top-center',closeButton:true});
+          return of();
+        }),
         tap((res:any)=>{
           localStorage.setItem("token", res.accessToken);
           localStorage.setItem("credentials", JSON.stringify(this.credentials));
